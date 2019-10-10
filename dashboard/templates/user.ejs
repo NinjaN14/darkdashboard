@@ -1,0 +1,225 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, usuário: usuário, badge: badge,  premium: premium, reps: reps, cB: cB, bg: bg, back: back, desc: desc}) %>
+<head>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Dark Website">
+    <meta property="og:url" content="https://darkdashboard.glitch.me/user/<%= usuário.id %>">
+    <meta property="og:description" content="Acesse o perfil de <%= usuário.username %>">
+    <meta property="og:image" content="<%= usuário.avatarURL %>?size=512">
+    <link rel="stylesheet" type="text/css" href="public/servers/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
+</head>
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .statusSymbol {
+        width: 12px;
+        height: 12px;
+        border-radius: 100px;
+        float: left;
+        margin-top: 6px;
+        margin-right: 5px;
+    }
+    .statusSymbolOnline {
+        background: limegreen;
+    }
+    .statusSymbolIdle {
+        background: #F39C12;
+    }
+    .statusSymbolDND {
+        background: #E74C3C;
+    }
+    .statusSymbolIdle {
+        background: #F39C12;
+    }
+    .statusSymbolInvisible {
+        background: dimgrey;
+    }
+    .statusSymbolStream {
+        background: purple;
+    }
+    .banner {
+        margin-top: 20px;
+    }
+    *.container img {
+        position: absolute;
+    }
+    .headerimagee {
+        z-index: 1;
+        max-width: auto;
+        position: relative;
+        margin: auto;
+        vertical-align: middle;
+    }
+    .pfp {
+        border-radius: 50%;
+        position: absolute;
+        top: 100px;
+        margin: auto;
+        margin-left: 50px;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        -webkit-transition: all 0.4s;
+        transition: all 0.1s;
+        display: block;
+    }
+    .nametitle {
+        position: absolute;
+        top: 110px;
+        margin: auto;
+        margin-left: 200px;
+        z-index: 1;
+        -webkit-transition: all 0.4s;
+        transition: all 0.4s;
+        padding: 2px 5px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .8);
+        line-height: 1.3;
+    }
+    .nameunder {
+        position: absolute;
+        margin-top: -90px;
+        margin-left: 210px;
+        z-index: 1;
+        -webkit-transition: all 0.4s;
+        transition: all 0.4s;
+        padding: 2px 5px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .8);
+        line-height: 1.3;
+    }
+    .socialbar {
+        width: 100%;
+        padding: 10px;
+    }
+    .item {
+        margin-top: 30px;
+    }
+    div .btn {
+        color: #7187dd !important;
+    }
+    .headerimagee,
+    .socialbar,
+    #site-header {
+        background-color:  !important;
+    }
+    .list-users-status {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #23272A;
+    }
+</style>
+<% if(bg >= 1 && back !== null) { %>
+<div class="headerimage" style="height:300px;z-index: 0; background-image:url('<%= back %>');"></div>
+<% } else { %>
+<div class="headerimage" style="height:200px;z-index: -0;background-image:url('');"></div>
+<% } %>
+<div class="container">
+    <div style="width:100%;  height: -30px; margin: auto; margin-left: -150px; margin-top: -100px;">
+        <h1 class="nametitle">
+            <%= usuário.username%>
+        </h1>
+<% if(user) {%>
+   <% if(usuário.id == user.id) { %>
+        <a class="btn nameunder" role="button" href="/edit">Editar</a>
+   <% }; %>
+<% }; %>
+        <br>
+
+        <% if(premium == 1){%>
+        <% if(usuário.avatarURL) {%>
+        <img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%;">
+        <% if(usuário.presence.status === "online"){ %>
+        <img class="list-users-status" style="margin-top: -100px; margin-left: 162px; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+        <% }else if(usuário.presence.status === "idle"){ %>
+        <img class="list-users-status" style="margin-top: -100px; margin-left: 162px; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+        <% }else if(usuário.presence.status === "dnd"){ %>
+        <img class="list-users-status" style="margin-top: -100px; margin-left: 162px; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+        <% }else if(usuário.presence.status === "offline"){ %>
+        <img class="list-users-status" style="margin-top: -100px; margin-left: 162px; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+        <% }%>
+        <%}else if(usuário.defaultAvatarURL) { %>
+        <img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%;">
+        <% if(usuário.presence.status === "online"){ %>
+        <img class="list-users-status" style="margin-top: 100px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+        <% }else if(usuário.presence.status === "idle"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 3;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+        <% }else if(usuário.presence.status === "dnd"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 3;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+        <% }else if(usuário.presence.status === "offline"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 3;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+        <% } else if(usuário.presence.status === "streaming"){%>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 3;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+        <%}%>
+        <%}%>
+        <% } else { %>
+        <% if(usuário.avatarURL) {%>
+        <img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%;">
+        <%}else if(usuário.defaultAvatarURL) { %>
+        <img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%;">
+        <% } %>
+        <% if(usuário.presence.status === "online"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+        <% }else if(usuário.presence.status === "idle"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+        <% }else if(usuário.presence.status === "dnd"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+        <% }else if(usuário.presence.status === "offline"){ %>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+        <% } else if(usuário.presence.status === "streaming"){%>
+        <img class="list-users-status" style="margin-top: 0px; margin-left: 162px; position:absolute; z-index: 2;" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+        <%}%>
+        <% } %>
+    </div>
+    <div class="card" style="width: 100%">
+        <div class="card-body">
+            <p class="">
+            </p>
+            <p class="">
+                <% if(desc !== null) {%>
+                Descrição: <span style="color:#7289DA">
+                    <%= desc %></span>
+                <% } else { %>
+                Descrição: <span style="color:#7289DA">Este usuário não possui descrição ! Caso queira editar isto, entre: <a href="/edit">Aqui</a></span>
+                <% } %>
+            </p>
+            <% if(reps == null) {%>
+            <p class="item">Pontos de Reputação: <span style="color:#7289DA">Esse usuário não possui reputação</span></p>
+            <% } else { %>
+            <p class"item">Pontos de Reputação: <span style="color:#7289DA">
+                    <%= reps %></span>
+            </p>
+            <% } %>
+            <% if(cB == null) {%>
+            <p class="item">Conta Bancária: <span style="color:#7289DA">Este usuário não possui nada</span></p>
+            <% } else { %>
+            <p class="item">Conta Bancária: <span style="color:#7289DA">
+                    <%= cB %></span>
+            </p>
+            <% } %>
+            <p class="item">ID: <span style="color:#7289DA">
+                    <%= usuário.id %></span>
+            </p>
+            <p class="item">Discriminator: <span style="color:#7289DA">#
+                    <%= usuário.discriminator %></span></p>
+            <% if( usuário.lastMessage) {%>
+            <p class="item">Última mensagem: <span style="color:#7289DA">
+                    <%= usuário.lastMessage %></span></p>
+            <%} else {%>
+            <p class="item">Última mensagem: <span style="color:#7289DA">Sem mensagens recentes</span></p>
+            <%} %>
+            <p class="item">Jogando: <span style="color:#7289DA">
+                    <%= usuário.presence.game ? usuário.presence.game.name : 'Não está jogando nada' %></span></p>
+            <p class="item">Tag: <span style="color:#7289DA">
+                    <%= usuário.tag %></span></p>
+            <p class="item">Conta criada em: <span style="color:#7289DA">
+                    <%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span></p>
+        </div>
+    </div>
+</div>
+<br>

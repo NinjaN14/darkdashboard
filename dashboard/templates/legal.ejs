@@ -1,0 +1,39 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
+
+<head>
+  <meta name="theme-color" content="#23272A">
+  <meta property="og:title" content="Dark Bot">
+  <meta property="og:url" content="https://darkdashboard.glitch.me">
+  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+</head>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-center">Legalidade</h3>
+      <div class="container text-center">
+        <div id="tableofcontents">
+          <h2>
+           Índice
+          </h2>
+          <h3>
+            <a href="#privacy">Política de Privacidade</a><br>
+            <a href="#terms">Termos de serviço</a>
+          </h3>
+        </div>
+        <div id="privacy">
+          <%- privacy %>
+        </div>
+        <div id="terms">
+          <%- terms %>
+        </div>
+        <div id="consent">
+          <b><h4>Ao utilizar este site, você concorda com os Termos de Serviço e a Política de Privacidade acima.</h4></b>
+          <h5>
+            <i>
+              Estes avisos legais foram gerados para uso neste painel na data: 13 de novembro de 2017 e foi editado pela última vez na data: <%= edited %>
+            </i>
+          </h5>
+        </div>
+      </div>
+    </div>
+<% include ./blocks/footer %>

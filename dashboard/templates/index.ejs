@@ -1,0 +1,250 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, stats: stats}) %>
+
+<head>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Dark Bot">
+    <meta property="og:url" content="https://darkdashboard.glitch.me">
+    <meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
+    <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+    <link rel="stylesheet" type="text/css" href="public/servers/main.css">
+<style>
+  .body-header-block {
+   background: #18191C;
+   margin-top: -21px;
+   padding: 17%;
+   border-style: solid;
+   border-color: #7289da;
+   border-width: 0px 0px 1px 0px
+  }
+  .body-header-text-title {
+   font-family: 'Arial';
+   font-size: 67px;
+   color: white;
+   margin-left: -135px;
+  }
+  .body-header-text-paragraph {
+   font-family: 'Arial';
+   font-size: 17px;
+   color: white;
+   margin-left: -155px;
+  }
+  .feat {
+   font-family: 'Arial';
+   font-size: 17px;
+   color: #7289da;
+  }
+  .body-header-text-block {
+   margin-top: -200px;
+  }
+  .headerButton {
+   color: #7289da;
+   background-color: #222;
+   width: 135px;
+  }
+  .headerButton:hover {
+   background-color: #191818;
+   box-shadow: 0 12px 26px 0 rgba(0,0,0,0.15), 0 17px 50px 0 rgba(0,0,0,0.10);
+  }
+  .column {
+   float: left;
+   width: 25%;
+   padding: 0 5px;
+  } 
+  .column2 {
+   float: left;
+   width: 14%;
+   padding: 0 5px;
+  } 
+  .row {margin: 0 -5px;}
+  /* Clear floats after the columns */
+  .row:after {
+   content: "";
+   display: table;
+   clear: both;
+  }
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .column2 {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #18191C;
+  color: white;
+  transition: transform .4s;
+}
+.card:hover {
+  margin: auto;
+  max-width: 315px;
+  box-shadow: 0 4px 8px 1px rgba(255, 255, 255, 0.02);
+}
+.card p {
+ color: white;
+}
+.card h3 {
+ color: #7289da;
+}
+.fa {font-size:50px;}
+.content {
+    margin: auto;
+}
+.body-title {
+ border-style: solid;
+ border-width: 0px 0px 0px 5px;
+ border-color: WHITE;
+ text-align: center;
+}
+.jumbotron {
+ color: white;
+ background-color: #18191C;
+}
+.partner-icon {
+ border-radius: 50%;
+ width: 100px;
+ height: 100px;
+}
+.list-users-status {
+ width: 35px;
+ height: 35px;
+ border-radius: 50%;
+ border-style: solid;
+ border-width: 3px;
+ border-color: #18191C;
+ margin-top: 80px;
+ margin-left: -40px;
+}
+</style>
+</head>
+
+<body style="background-color: #202226">
+  <div class="body-header-block">
+   <div class="body-header-text-block">
+     <h1 id="demo" class="body-header-text-title"></h1>
+     <p class="body-header-text-paragraph">
+        <span style="color: #18191C;">_</span>Um incrível bot que possue funções dentro do <span class="feat">WebSite</span> com Perfis, Informações sobre o Servidor, etc.
+        E obviamente no <span class="feat">Discord</span> com vários comandos de música, roleplay, economia e cosméticos.
+     </p>
+   </div>
+   <a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=588520411025637387&scope=bot&permissions=2113404159" target="_blank" role="button">Me Adicione »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://www.patreon.com/join/dark" target="_blank" role="button">Patrocinar »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://twitter.com/Soda" target="_blank" role="button">Twitter »</a>
+  </div>
+<br>
+   <h1 class="body-title">
+     Estatísticas
+    </h1>
+  <div class="row content container">
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-male"></i> <i class="fa fa-female"></i></p>
+      <h3><%= stats.members%></h3>
+      <p>Usuários</p>
+    </div>
+   </div>
+
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-server"></i></p>
+      <h3><%= stats.guilds %></h3>
+      <p>Servidores</p>
+    </div>
+   </div>
+  
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-clock"></i></p>
+      <h3><%= stats.uptime %></h3>
+      <p>Tempo Acordado</p>
+    </div>
+   </div>
+  
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-comment-alt"></i></p>
+      <h3><%= stats.commands %></h3>
+      <p>Comandos</p>
+    </div>
+   </div>
+  </div>
+<br>
+  <div class="row content container">
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-angle-up"></i></p>
+      <h3><%= '612' %></h3>
+      <p>UpVotes</p>
+    </div>
+   </div>
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-angle-double-up"></i></p>
+      <h3><%= '43' %></h3>
+      <p>UpVotes Mensais</p>
+    </div>
+   </div>
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-list"></i></p>
+      <h3><%= stats.channels %></h3>
+      <p>Canais</p>
+    </div>
+   </div>
+ </div>
+ <br>
+   <h1 class="body-title">
+     Parceiros
+   </h1>
+ <div class="container">
+  <div class="jumbotron" id="#">
+   <div class="row" style="text-align: center;" id="#partners">
+   <% var partners = ['559887365532024841', '628224324880302100', '468440217083183134']%> 
+   <% partners.forEach(userID => {%>
+     <% var partner = bot.users.get(userID); %>
+    <div class="column2" style=" margin: auto;">
+      <a href="/user/<%= partner.id %>"><img class="partner-icon" src="<%= partner.displayAvatarURL%>" alt="<%= partner.username %>" title="<%= partner.username %>"></a>
+     <% if(partner.presence.status == 'online') { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png" title="Online">
+            <% } else if(partner.presence.status == 'idle'){ %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png" title="Ausente">
+            <% } else if(partner.presence.status == 'dnd') {%>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png" title="Não Perturbe">
+            <% } else { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png" title="Offline">
+      <% } %>
+    </div>
+   <% }); %>
+   </div>
+   <p>
+     
+    </p>
+  </div>  
+ </div>
+</body>
+
+<script>
+var i = 0;
+var txt = "Bem-Vindo!";
+var speed = 75;
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+  
+typeWriter()
+</script>

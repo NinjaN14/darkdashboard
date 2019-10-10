@@ -1,0 +1,180 @@
+<style>
+    li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    }
+    li a:hover:not(.active) {
+     background-color: #0f1111;
+     color: white;
+     text-decoration: none;
+    }
+</style>
+
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
+<link rel="stylesheet" type="text/css" href="public/servers/main.css">
+<meta name="theme-color" content="#23272A">
+<meta property="og:title" content="Dark Bot">
+<meta property="og:url" content="https://darkdashboard.glitch.me">
+<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
+<style>
+    .headerDiv {
+        background-color: #18191C;
+        width: 100%;
+        height: 400px;
+        margin-top: -24px;
+    }
+    .headerImage {
+        margin-left: 70px;
+    }
+    .headerTextDescription {
+        color: white;
+        width: 640px;
+        margin-left: 200px;
+        margin-top: -40px;
+        font-size: 17px;
+        word-break: normal;
+    }
+    .textFeatured {
+        color: #7289DA;
+    }
+    .column {
+        float: left;
+        width: 25%;
+        padding: 10px;
+        height: 300px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    @media screen and (max-width: 600px) {
+        .column {
+            width: 100%;
+        }
+    }
+    .server {
+        background-color: #303238;
+        height: 280px;
+        border-radius: 5px;
+        width: 250px;
+        transition: transform .4s;
+    }
+    .server:hover {
+        transform: scale(1.10);
+    }
+    .server-header {
+        background-color: #18191C;
+        border-radius: 5px 5px 0px 0px;
+    }
+    .server-header img {
+        border-radius: 50%;
+        height: 108px;
+        width: 108px;
+        margin-top: 15px;
+        margin: auto;
+        margin-left: 71px;
+    }
+    .server-header .server-name {
+        color: white;
+        font-size: 17px;
+        text-align: center;
+        cursor: default;
+    }
+    .server-info {
+        margin: auto;
+        background-color: #7289da;
+        border-radius: 2px;
+        font-size: 15px;
+        width: 115px;
+        color: white;
+        text-align: center;
+        font-family: 'Arial';
+    }
+    .server-info:hover {
+        background-color: #5b6ba3;
+        color: white;
+    }
+    .server-owner {
+        margin-top: 20px;
+        color: #7289da;
+        text-align: center;
+    }
+    .statusSymbol {
+        width: 8px;
+        height: 8px;
+        border-radius: 100px;
+        float: left;
+        margin-top: 8px;
+        margin-right: 5px;
+    }
+    .statusSymbolOnline {
+        background: #21BA45;
+    }
+    .statusSymbolIdle {
+        background: #F39C12;
+    }
+    .statusSymbolDND {
+        background: #E74C3C;
+    }
+    .statusSymbolIdle {
+        background: #F39C12;
+    }
+    .statusSymbolInvisible {
+        background: grey;
+    }
+    li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 20px;
+     text-decoration: none;
+    }
+    li a:hover:not(.active) {
+     background-color: #0f1111;
+     text-decoration: none;
+    }
+</style>
+<div class="headerDiv">
+    <img class="headerImage" src="https://eleven.sirv.com/ryouji/BANNER_SERVIDORES.png">
+    <p class="headerTextDescription">
+        Lista de servidores do <span class="textFeatured">Dark</span>. Aqui estão <span class="textFeatured">
+            <%= bot.guilds.size%> Servidores</span> em que o <span class="textFeatured">Dark</span> está.
+    </p>
+</div>
+<br>
+<body style="background-color: #222222;">
+ <div class="row container" style="">
+ <% bot.guilds.forEach(guild => { %>
+ <% if(bot.guilds.get(guild.id).options.showInServersList !== false) {%>
+ <% let owner = bot.users.get(guild.owner.id); %>
+  <div class="column">
+    <div class="server">
+      <div class="server-header">
+      <% if(guild.icon !== null) { %>
+        <a title="Visitar <%= guild.name %>" href="/guild/<%= guild.id%>"><img src="<%= guild.iconURL.replace('.jpg', '.png').replace('.jpeg', '.png') %>?size=1024" alt="<%= guild.id %>"></a>
+      <% } else { %>
+        <a title="Visitar <%= guild.name %>" onclick="red('/guild/<%= guild.id%>')"><img src="https://cdn.glitch.com/97e329a7-3259-4653-b072-c322be28bd14%2FIndispon%C3%ADvel.png" alt="<%= guild.id %>"></a>
+      <% } %>
+        <p class="server-name"><%= guild.name %></p>
+      </div>
+      <div class="server-body">
+        <p class="server-info" style="margin-top: 5px;"> <%= guild.members.size %> Membros </p>
+        <br>
+        <p class="server-info"> <%= guild.emojis.size %> Emojis </p>
+        <p class="server-owner"><%= owner.tag %></p>  
+      </div>  
+     </div>
+   </div>
+   <% }; %>
+  <% }); %>
+  </div>
+</body>
+<% include ./blocks/footer %>

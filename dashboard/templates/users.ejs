@@ -1,0 +1,42 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
+
+<style>
+.user-icon {
+ border-radius: 50%;
+ width: 100px;
+ height: 100px;
+}
+.list-users-status {
+ width: 35px;
+ height: 35px;
+ border-radius: 50%;
+ border-style: solid;
+ border-width: 3px;
+ border-color: #18191C;
+ margin-top: 80px;
+ margin-left: -40px;
+}
+</style>
+
+
+<div class="container">
+ <div class="row" style="text-align: center;" id="#partners">
+  <% var users = bot.users; %> 
+   <% users.forEach(userID => {%>
+    <% var member = bot.users.get(userID.id); %>
+    <% if(member.bot) return; %>
+     <div class="column2" style=" margin: auto;">
+      <a href="/user/<%= member.id %>"><img class="user-icon" src="<%= member.displayAvatarURL%>" alt="<%= member.username %>" title="<%= member.username %>"></a>
+       <% if(member.presence.status == 'online') { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png" title="Online">
+            <% } else if(member.presence.status == 'idle'){ %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png" title="Ausente">
+            <% } else if(member.presence.status == 'dnd') {%>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png" title="Não Perturbe">
+            <% } else { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png" title="Offline">
+      <% } %>
+    </div>
+   <% }); %>
+  </div>
+</div>

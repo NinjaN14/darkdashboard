@@ -1,0 +1,169 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, invite: invite, createdAt: createdAt}) %>
+<% if(guild) {%>
+<head>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Dark WebSite">
+    <meta property="og:url" content="https://darkdashboard.glitch.me/guild/<%= guild.id %>">
+    <meta property="og:description" content="Acesse <%= guild.name %> ">
+    <meta property="og:image" content="<%= guild.iconURL.replace('.jpg', '.png').replace('.jpeg', '.png')%>?size=512">
+</head>
+<style>
+  .body-header-block {
+   background: #18191C;
+   margin-top: -21px;
+   padding: 11%;
+   height: 100px;
+  }
+  .server-back {
+   background: #7289da;
+   border-radius: 50px;
+   border: 0px solid #7289da;
+   width: 35px;
+   height: 35px;
+  }
+  .server-back:hover {
+   background: #6f82c6;
+  }
+  .server-icon-img {
+    height: 216px;
+    width: 216px;
+    border-radius: 50%;
+  }
+  
+  .server-name {
+   font-size: 34px;
+   margin-left: 8px;
+  }
+  .online {
+	 width: 8px;
+	 height: 8px;
+	 border-radius: 100px;
+	 float: left;
+	 margin-top: 8px;
+	 margin-right: 5px;
+	 background: #21BA45;
+  }
+  .idle {
+	 width: 8px;
+	 height: 8px;
+	 border-radius: 100px;
+	 float: left;
+	 margin-top: 8px;
+	 margin-right: 5px;
+	 background: #F39C12;
+  }
+  .dnd {
+	 width: 8px;
+	 height: 8px;
+	 border-radius: 100px;
+	 float: left;
+	 margin-top: 8px;
+	 margin-right: 5px;
+	 background: #E74C3C;
+  }
+  .statusSymbolIdle {
+	 width: 8px;
+	 height: 8px;
+	 border-radius: 100px;
+	 float: left;
+	 margin-top: 8px;
+	 margin-right: 5px;
+	 background: #F39C12;
+  }
+  .offline {
+	 width: 8px;
+	 height: 8px;
+	 border-radius: 100px;
+	 float: left;
+	 margin-top: 8px;
+	 margin-right: 5px;
+	 background: dimgrey;
+  }
+  .container {
+   margin-top: 55px;
+  }
+  .nav-link span {
+   color: #7289da;
+  }
+  .inf {
+  margin-top: -25px;
+  }
+  .body-button {
+   background: #7289da;
+   color: white;
+  }
+</style>
+<%
+let region = {
+    'amsterdam' : ' Amsterdã',
+    'brazil'    : ' Brasil',
+    'eu-central': ' Europa Central',
+    'eu-west'   : ' Europa Ocidental',
+    'frankfurt' : ' Frankfurt',
+    'hongkong'  : ' Hong Kong',
+    'japan'     : ' Japão',
+    'london'    : ' Londres',
+    'russia'    : ' Russia',
+    'singapore' : ' Singapura',
+    'sydney'    : ' Sydney',
+    'us-central': ' EUA Central',
+    'us-east'   : ' EUA Oriental',
+    'us-west'   : ' EUA Ocidental',
+    'us-south'  : ' EUA Sul',
+}[guild.region];
+%>
+<body>
+  <div class="body-header-block" style="">
+    <button class="server-back" onclick="window.location.href='/guilds'"><i class="fa fa-arrow-circle-left" style="color: white;"></i></button>
+   <% if(guild.iconURL) { %>
+    <img class="server-icon-img" src="<%= guild.iconURL.replace('jpg', 'png') %>?size=512"><span class="server-name"><%= guild.name %></span>
+   <% } else { %>
+    <img class="server-icon-img" src="https://cdn.glitch.com/97e329a7-3259-4653-b072-c322be28bd14%2FUnknowicon.png"><span class="server-name"><%= guild.name %></span>
+   <% } %>
+  </div>
+  <button onclick="window.location.href='/i/<%= guild.id %>'" class="btn body-button" style="margin-left: 400px;">Entrar</button>
+<% 
+  if(auth) {
+		const isManaged = guild && !!guild.member(user.id) ? guild.member(user.id).permissions.has('MANAGE_GUILD') : false;
+    if(isManaged) { %>
+    <button onclick="window.location.href='/manage/<%= guild.id %>'" class="btn body-button" style="">Gerenciar</button>
+<%    }
+  };
+%>
+  <div class="container" style="border: 1px solid #23272A;">
+    <span style="font-size: 24px;">Membros</span>
+    <p class="nav-link disable">
+      <i class="twa twa-lg twa-busts-in-silhouette"></i> Total <%= guild.members.size %>
+    </p>
+    <p class="nav-link disable" style="margin-top: -35px;">
+     <i class="online"></i> Online <%= guild.members.filter(o => o.presence.status === 'online').size %>
+    </p>
+    <p class="nav-link disable" style="margin-top: -35px;">
+     <span class="idle"></span> Ausente <%= guild.members.filter(o => o.presence.status === 'idle').size %>
+    </p>
+    <p class="nav-link disable" style="margin-top: -35px;">
+     <span class="dnd"></span> Não perturbe <%= guild.members.filter(o => o.presence.status === 'dnd').size %>
+    </p>
+    <p class="nav-link disable" style="margin-top: -35px;">
+     <span class="offline"></span> Offline <%= guild.members.filter(o => o.presence.status === 'offline').size %>
+    </p>
+  </div>
+  <div class="container" style="border: 1px solid #23272A;">
+    <span style="font-size: 24px;">Informações</span>
+    <p class="nav-link disable">
+      Dono: <span><%= guild.owner.user.tag %></span>
+    </p> 
+    <p class="nav-link disable inf">
+      ID: <span><%= guild.id %></span>
+    </p>
+    <p class="nav-link disable inf">
+      Criado em: <span><%= createdAt %></span>
+    </p>
+    <p class="nav-link disable inf">
+      Região: <span><%= region %></span>
+    </p>
+    
+  </div>
+<br>
+<br>
+    <% } %>

@@ -1,0 +1,12 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth, videoID: videoID}) %>
+<style>
+</style>
+<div class="container">
+ <iframe id="iframe" src="https://www.youtube.com/embed/<%= videoID %>?autoplay=1">
+ </iframe>
+</div>
+
+<script>
+document.getElementById('iframe').style.height = `${window.innerHeight - 100}px`;
+document.getElementById('iframe').style.width = `${window.innerWidth - 252}px`;
+</script>

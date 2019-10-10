@@ -1,0 +1,128 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<% console.log(user); %>
+<% const usuário = bot.users.get(user.id) %>
+<head>
+	<meta name="theme-color" content="#23272A">
+	<meta property="og:title" content="Dark Bot">
+	<meta property="og:url" content="https://darkdashboard.glitch.me">
+	<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+	<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+</head>
+
+<style>
+  .user-banner {
+    height: 250px;
+    width: 100%;
+    max-width: auto;
+    max-height: auto;
+  }
+  .user-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -240px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #7289da;
+    width: 200px;
+    height: 200px;
+  }
+  .user-name {
+    font-family: 'Arial';
+    font-size: 25px;  
+    text-align: center;
+    text-shadow: 0 0 3px black, 0 0 5px black;
+    text-transform: capitalize;
+  }
+  .sub-icon {
+    width: 35px;
+    height: 35px;
+   }
+  .info {
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .info r {
+   color: #8057cc;
+   text-decoration: none;
+  }
+/* Create four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 15%;
+    padding: 15px;
+    height: 200px; /* Should be removed. Only for demonstration */
+}
+/* Clear floats after the columns */
+.row:after {
+ 
+}
+  .container {
+    max-width: 75%;
+    margin: auto;
+}
+  
+ .nameunder {
+  z-index: 1;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  padding: 2px 4px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .8);
+  line-height: 1.3;
+ }
+</style>
+
+<body style="background-color: #303030;">
+  <header>
+   <div class="user-banner"></div>
+     <a href="/user/<%= user.id %>"><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>?size=512" class="user-img"></a>
+     <p class="user-name"><%= user.username %> <a class="btn nameunder" role="button" href="/edit">Editar</a></p>
+  </header>
+  <info>
+  </info>
+</body>
+<body>
+<div class="container">
+  <div class="row">
+<% user.guilds.forEach(guild => {
+  const permsOnGuild = new perms(guild.permissions);
+  if(!permsOnGuild.has("MANAGE_GUILD")) return;
+%>
+  <div class="column">
+    <% if (guild.icon) { %>
+      <img class="d-flex mr-3 rounded-circle" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.jpg?size=128" style="width: 75px;" alt="">
+    <% } else { %>
+      <img class="d-flex mr-3 rounded-circle" src="https://i.imgur.com/2otMem9.png" style="width: 75px;" alt="">
+    <% } %>
+    <div class="media-body">
+      <h5 class="mt-0 mb-1"><%= guild.name %></h5>
+      <%
+      let href, text;
+      let enabled;
+      if(bot.guilds.get(guild.id)) {
+        href = "/manage/" + guild.id;
+        text = "Gerenciar";
+        enabled = true;
+      } else {
+        href = `/add/${guild.id}`;
+        text = "Invite Bot";
+        enabled = user.id === bot.config.ownerID || bot.appInfo.botPublic;
+      }
+      %>
+      <a class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>">
+        <%= text %>
+        <i class="right chevron icon"></i>
+      </a>
+    </div>
+  </div>
+<% }); %>
+</div>
+</div>
+</body>
+<% include ./blocks/footer %>

@@ -1,0 +1,65 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
+
+		<meta name="theme-color" content="#23272A">
+		<meta property="og:title" content="Dark Bot">
+		<meta property="og:url" content="https://darkdashboard.glitch.me">
+		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+	</head>
+<style>
+  .card-img-top {
+        position: relative;
+        margin: auto;
+        vertical-align: middle;
+  }
+  .col {
+   margin: auto;
+  }
+  .btn-primary {
+   float: right;
+   background-color: #7289da;
+  }
+  .form-control {
+   width: 100%;
+  }
+</style>
+<div class="container">
+	<div class="card" style="width: 100%"><br>
+		<% if (user.avatar) { %>
+			<img class="card-img-top" style="width: 20%; border-radius: 50%; border : solid #7289DA; text-align: center;" src="<%=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`%> "alt="<%= user.username %>">
+			<% } else { %>
+        <img class="card-img-top" style="widget: 20%; border-radius: 50%; border: solid #7289DA; text-align: center;" src="" />
+				<% } %>
+					<div class="card-body" style="">
+								<h4 class="card-title" style="">
+									<%= user.username %> <%= %>
+								</h4>
+									<p class="card-text" id="guildCreate">
+										<%= bot.moment.utc(user.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')%>
+									</p>
+					</div>
+   <a href="/generateToken" class="btn">Gerar Token</a>
+	</div>
+	<div class="col-sm-8 mx-auto" style="margin-top: 15px;">
+	</div>
+	<hr>
+	<div class="card" style="width: 100%;">
+
+		<div class="col col-8">
+     <br>
+			<form method="post">
+				<% const settings = bot.users.get(user.id).options; %>
+					<% for (const key in settings) { %>
+						<div class="form-group">
+             <% if(key !== 'token') { %>
+							<label for="<%= key %>"><%= key.replace('description', 'Descrição do seu Perfil') %></label>
+							<input type="text" style="width: 800px; margin-left: -45px;" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key.replace('description', 'Descrição') %>" value="<%= settings[key] %>">
+             <% }; %>
+						</div>
+						<% } %>
+							<button type="submit" onclick="setTimeout(function() {alert('F5')}, 1000)" class="btn btn-primary">Confirmar</button>
+       <br>
+			</form>
+			<br>
+		</div>
+	</div>
