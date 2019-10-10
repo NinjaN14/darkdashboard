@@ -1,0 +1,76 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+
+<head>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Dark Bot">
+    <meta property="og:url" content="https://darkdashboard.glitch.me">
+    <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+    <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<script>
+    function myFunction() {
+        alert("Você está prestes a fazer download da planilha de trabalho!");
+    }
+</script>
+<div class="container">
+    <h1 class="display-3">Admin</h1>
+    <div class="jumbotron">
+        <h4 class="card-text"> Planilha ㅤ<a class="btn btn-success" href="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2FPasta1.xlsx?1529529536828" role="button" onclick="myFunction()" download>Baixar <i class="fa fa-cloud-download" aria-hidden="true"></i></a></h4>
+        <hr>
+        <h4 class="card-text"> Editor ㅤ<a class="btn btn-success" href="https://glitch.com/edit/#!/darkdashboard" role="button" target="_blank">Entrar <i class="fa fa-share-square-o"></i></a></h4>
+    </div>
+    <br>
+    <h1 class="display-3">Perfil</h1>
+    <div class="card" style="width: 100%">
+        <% if (user.avatar) { %>
+        <img class="" alt="<%= user.username%>" width="256" height="256" src="https://cdn.discordapp.com/avatars/<%= user.id%>/<%= user.avatar%>?size=2048" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #23272A" src="<%= user.avatarURL%>?size=512">
+        <% } %>
+        <div class="card-body">
+            <% if(user) { %>
+            <h4 class="card-title">
+                <%= user.username %>
+            </h4>
+            <% } else { %>
+            <h4 class="card-title">
+                <%= user.tag %>
+            </h4>
+            <% } %>
+            <a class="btn btn-success" href="https://darkdashboard.glitch.me/user/<%= user.id%>" target="_blank" role="button">Ver Meu Perfil <i class="fa fa-share-square" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <br>
+    <h1 class="display-3">Administração</h1>
+    <ul class="list-unstyled jumbotron">
+        <% bot.guilds.forEach(guild => {
+%>
+        <li class="media" style="padding: 10px;">
+            <% if (guild.icon) { %>
+            <img class="d-flex mr-3 rounded-circle" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.jpg?size=128" style="width: 75px; border-color: WHITE;" alt="">
+            <% } else { %>
+            <img class="d-flex mr-3 rounded-circle" src="https://i.imgur.com/2otMem9.png" style="width: 75px;" alt="Servidor">
+            <% } %>
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">
+                    <%= guild.name %>
+                </h5>
+                <%
+      let href, text, target;
+      if(bot.guilds.get(guild.id)) {
+        text = guild.owner.user.tag;
+        href = `/guild/${guild.id}`
+        target = `_blank`
+      } else {
+        href = `/add/${guild.id}`;
+        text = "Convide o Bot";
+      }
+      %>
+                <a class="btn btn-primary" role="button" href="<%= href %>">
+                    <%= text %>
+                    <i class="right chevron icon"></i>
+                </a>
+            </div>
+        </li>
+        <% }); %>
+    </ul>
+</div>
