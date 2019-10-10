@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <title>
+      <%= bot.user.username %>
+    </title>
+  
+<head>
+	<meta charset="utf-8">
+  
+	<link rel="icon" href="<%= bot.user.avatarURL%>" style="border-width: 50px;" type="image/x-icon">
+  
+  <link rel="manifest" href="/public/manifest.json">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<style>
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+  
+::-webkit-scrollbar {
+	background: #FFFFFF;
+	width: 8px;
+}
+::-webkit-scrollbar-button {
+	background: none;
+  display: none;
+}
+::-webkit-scrollbar-track {
+	background: #222222;
+}
+::-webkit-scrollbar-track-piece {
+	background: #23272A;
+}
+::-webkit-scrollbar-thumb {
+	background: #4a4f56;
+	border-radius: 10px 10px 10px 10px
+}
+::-webkit-scrollbar-corner {
+	background: #4a4f56;
+}
+	</style>
+	<script>
+	$('#loading').hide();
+	$('.pageContent').show();
+ </script>
+ <link href="/public/theme-dark.css" rel="stylesheet" id="theme"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+</head>
+<body>
+<style>
+.navs {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #7289da;
+}
+.l {
+    float: left;
+    border-right: 1px dashed #bbb;
+}
+.l:last-child {
+    border-right: none;
+}
+.l a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+.l a:hover:not(.active) {
+    background-color: #0f1111;
+    text-decoration: none;
+}
+.active {
+    background-color: #0f1111;
+}
+body {
+ background-color: #18191C;
+}
+</style>
+	<div id="loading"></div>
+	<div class="pageContent">
+  <ul class="navs">
+   <li class="l"><a id="Nav_BotUserName" class="" style="font-family: 'Arial'; cursor: default; color: white;"><%= bot.user.username %></a></li>
+   <li class="l"><a href="/">Início</a></li>
+   <li class="l"><a href="/guilds">Servidores</a></li>
+   <li class="l"><a href="/commands">Comandos</a></li>
+   <li class="l"><a href="/users">Usuários</a></li>
+   <li class="l"><a href="/contributors">Contribuidores</a></li>
+														<% if(auth) { %>
+															<li class="l" style="float:right"><a href="/logout">Sair</a></li>
+															<% if(user.id === bot.config.ownerID) { %>
+																<li class="l" style="float:right"><a href="/admin">Admin</a></li>
+																<% } %>
+															 <li class="l" style="float:right"><a href="/me"><%= user.username %></a></li>
+																	<% } else { %>
+																		<li class="l" style="float:right"><a href="/login">Login</a></li>
+																		<% } %>
+</ul>
+<br>
