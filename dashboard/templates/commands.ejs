@@ -1,0 +1,89 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+
+<head>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Dark Bot">
+    <meta property="og:url" content="https://darkdashboard.glitch.me">
+    <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+    <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+    <style>
+        .card {
+            border-style: solid;
+            border-width: 0px 0px 0px 5px;
+            border-color: #7289DA;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .card-header {
+            background: #2C2F33;
+        }
+        .card {
+            background: #2C2F33;
+        }
+        .display-5 {
+            border-style: solid;
+            border-width: 0px 0px 0px 5px;
+            border-color: WHITE;
+        }
+        .jumbotron {
+            background-color: #222222;
+        }
+        .headerDiv {
+            background-color: #18191C;
+            width: 100%;
+            height: 400px;
+            margin-top: -22px;
+        }
+        .headerImage {
+            margin-left: 50px;
+        }
+        .headerTextDescription {
+            color: white;
+            width: 640px;
+            margin-left: 200px;
+            margin-top: -40px;
+            font-size: 17px;
+            word-break: normal;
+        }
+        .textFeatured {
+            color: #7289DA;
+        }
+    </style>
+</head>
+<body style="background-color: #222222;">
+ <% const help = {}; bot.commands.forEach((command) => {const cat = command.help.category;if(!help.hasOwnProperty(cat)) help[cat] = [];help[cat].push(command);});%>
+ <div class="headerDiv">
+    <img class="headerImage" src="https://eleven.sirv.com/ryouji/COMANDOS_BANNER.png">
+    <p class="headerTextDescription">
+        O <span class="textFeatured">Dark</span> possui aproximadamente <span class="textFeatured">[<%= bot.commandsNumber%>]</span> comandos. Use <span class="textFeatured">d!help [comando]</span> para ver as informações detalhadas de um comando
+    </p>
+ </div>
+ <div class="container">
+    <% for (const category in help) { %>
+    <br>
+    <h1 class="display-5 text-center">
+        <%= category %>
+    </h1>
+    <br>
+    <div class="card-columns">
+        <% for (const command of help[category]) { %>
+        <div class="card">
+            <br>
+            <h3 class="text-center">
+                <%= command.help.name %>
+            </h3>
+            <div class="card-block" style="margin: 7px">
+                <p class="card-text text-center">
+                    <%= command.help.description %>
+                </p>
+                <p class="text-center"><span style="font-weight: bold;">Exemplo(s):</span>
+                    <%- command.help.usage.replace(/\n/g) %>
+                </p>
+            </div>
+        </div>
+        </tr>
+        <% } %>
+    </div>
+    <% } %>
+    <br>
+</div>
+</body>
