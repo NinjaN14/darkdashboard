@@ -1,0 +1,26 @@
+{
+  "name": "Dark™",
+  "short_name": "Dark",
+  "start_url": "/?home=true",
+    "icons": [
+    {
+      "src": "https://sodacc.sirv.com/dark/dark.jpg",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "https://sodacc.sirv.com/dark/dark.jpg",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "https://sodacc.sirv.com/dark/dark.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "theme_color": "#7289da",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "portrait"
+}
