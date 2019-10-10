@@ -1,0 +1,32 @@
+{
+     "badge": {
+      "name": "Badge",
+      "description": " Adiciona uma **Badge (Ícone)** ao seu perfil ",
+      "valor": 1350
+     },
+     "bonus": {
+       "name": "Bônus",
+       "description": "Obtém **400%** como bônus de XP por mensagem",
+       "valor": 2850
+     },
+     "premium": {
+       "name": "Premium",
+       "description": "Recebe uma **Badge** em seu perfil, ganha **400%** de bônus",
+       "valor": 7350
+     },
+     "background": {
+       "name": "Background",
+       "description": "Dá o direito de você adicionar um imagem de **Plano de Fundo** no seu perfil",
+       "valor": 5805
+     },
+     "partner": {
+        "name": "Parceria",
+        "description": "Adiciona o servidor à lista de **Parceiros do Site**",
+        "valor": 18450
+     },
+     "description": {
+        "name": "Descrição",
+        "description": "Dá direito à você de adicionar um descrição ao seu perfil no **Site**",
+        "valor": 350
+     }    
+}
