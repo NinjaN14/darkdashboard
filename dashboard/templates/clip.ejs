@@ -1,0 +1,15 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth, clipID: clipID}) %>
+<div class="container center">
+
+<iframe
+    src="https://clips.twitch.tv/embed?clip=<%= clipID %>"
+    width="100%"
+    height="500px"
+    frameborder="<frameborder>"
+    scrolling="<scrolling>"
+    allowfullscreen="<allow full screen>">
+</iframe>
+</div>
+<script>
+document.getElementById('iframe').property.height = `${window.innerWidth}px`;
+</script>
